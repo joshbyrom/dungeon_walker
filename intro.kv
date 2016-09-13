@@ -1,0 +1,21 @@
+#:kivy 1.9.1
+
+<Intro>:
+    canvas.before:
+        Rectangle:
+            pos: root.pos
+            size: root.size
+            source: "images/splash.png"
+
+    BoxLayout:
+        spacing: 10
+
+        Button:
+            id: help_button
+            text: "How to Play"
+            on_press: root.help_button_pressed()
+
+        Button:
+            id: start_button
+            text: "Start"
+            on_press: root.start_button_pressed()

@@ -1,3 +1,9 @@
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.image import Image
+
 # entry file to program
 class Walker:
     def __init__(self, **kwargs):
@@ -63,11 +69,29 @@ class Walker:
             self.facing_direction = self.get_direction_right_of(self.facing_direction)
         else:
             raise TypeError('Only use strings: Right or Left')
+
+class Intro(BoxLayout):
+    def __init__(self, **kwargs):
+        BoxLayout.__init__(self, image='images/splash.png', **kwargs)
+
+    def help_button_pressed(self, *args):
+        print 'help button pressed'
+
+    def start_button_pressed(self, *args):
+        print 'start button pressed'
         
-class Simulation:
+class Simulation(App):
     def __init__(self):
+        App.__init__(self)
         print 'simulation created'
 
+    def build(self):
+        Builder.load_file('intro.kv')
+
+        self.intro = Intro()
+        return self.intro
+
+        
 if __name__ == '__main__':
     walker = Walker()
 
@@ -84,3 +108,4 @@ if __name__ == '__main__':
     walker.move_backward()
     
     simulation = Simulation()
+    simulation.run()
